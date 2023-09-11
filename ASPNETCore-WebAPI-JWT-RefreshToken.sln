@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNETCore-WebAPI-JWT-RefreshToken", "ASPNETCore-WebAPI-JWT-RefreshToken\ASPNETCore-WebAPI-JWT-RefreshToken.csproj", "{0C7E2504-8AA8-4587-B854-35335C7B2547}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNETCore-WebAPI-JWT-RefreshToken", "ASPNETCore-WebAPI-JWT-RefreshToken\ASPNETCore-WebAPI-JWT-RefreshToken.csproj", "{0C7E2504-8AA8-4587-B854-35335C7B2547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{9DDDB75D-597F-4A8C-802F-C9116D55E010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0C7E2504-8AA8-4587-B854-35335C7B2547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C7E2504-8AA8-4587-B854-35335C7B2547}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C7E2504-8AA8-4587-B854-35335C7B2547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DDDB75D-597F-4A8C-802F-C9116D55E010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DDDB75D-597F-4A8C-802F-C9116D55E010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DDDB75D-597F-4A8C-802F-C9116D55E010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDDB75D-597F-4A8C-802F-C9116D55E010}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,6 +35,25 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken.Controllers
             return new UnprocessableEntityObjectResult(ModelState);
         }
 
+        [HttpPost("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] CreateUserDto createUserDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await service.RegisterAdmin(createUserDto);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.TryAddModelError(error.Code, error.Description);
+                    }
+                    return BadRequest(ModelState);
+                }
+                return StatusCode(201);
+            }
+            return new UnprocessableEntityObjectResult(ModelState);
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] LoginDto user)
         {
@@ -44,6 +63,17 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken.Controllers
                     return Unauthorized();
                 var tokenDto = await service.CreateToken(true);
                 return Ok(tokenDto);
+            }
+            return new UnprocessableEntityObjectResult(ModelState);
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] TokenDto tokenDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var tokenDtoToReturn = await service.RefreshToken(tokenDto);
+                return Ok(tokenDtoToReturn);
             }
             return new UnprocessableEntityObjectResult(ModelState);
         }

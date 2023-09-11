@@ -41,6 +41,20 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken.Service
             return result;
         }
 
+        public async Task<IdentityResult> RegisterAdmin(CreateUserDto createUserDto)
+        {
+            var user = mapper.Map<User>(createUserDto);
+
+            var result = await userManager.CreateAsync(user, createUserDto.Password);
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "ADMIN");
+            }
+
+            return result;
+        }
+
         public async Task<bool> ValidateUser(LoginDto userForAuth)
         {
             user = await userManager.FindByNameAsync(userForAuth.UserName);
@@ -60,7 +74,7 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken.Service
 
             if (populateExp)
             {
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(3);
             }
             await userManager.UpdateAsync(user);
             var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

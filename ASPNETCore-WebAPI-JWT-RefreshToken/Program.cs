@@ -15,6 +15,17 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(option =>
+            {
+                option.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                });
+            });
+
             builder.Services.AddDbContext<RepositoryContext>(option =>
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("default"));
@@ -42,6 +53,8 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("EnableCORS");
 
             app.UseHttpsRedirection();
 
