@@ -13,6 +13,13 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var congiguration = builder.Configuration;
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            congiguration.
+                AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env}.json", true, true);
 
             // Add services to the container.
             builder.Services.AddCors(option =>
@@ -25,10 +32,10 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
 
                 });
             });
-
+            var test = congiguration.GetConnectionString("default");
             builder.Services.AddDbContext<RepositoryContext>(option =>
             {
-                option.UseSqlServer(builder.Configuration.GetConnectionString("default"));
+                option.UseSqlServer(congiguration.GetConnectionString("default"));
             });
 
             builder.Services.AddIdentity<User, IdentityRole>(option =>
@@ -48,7 +55,7 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || env == "Local")
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
