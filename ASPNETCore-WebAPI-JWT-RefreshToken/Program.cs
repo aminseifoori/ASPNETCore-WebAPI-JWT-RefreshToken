@@ -32,7 +32,7 @@ namespace ASPNETCore_WebAPI_JWT_RefreshToken
 
                 });
             });
-            var test = congiguration.GetConnectionString("default");
+
             builder.Services.AddDbContext<RepositoryContext>(option =>
             {
                 option.UseSqlServer(congiguration.GetConnectionString("default"));
